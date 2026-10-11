@@ -9,8 +9,8 @@
   --card: #ffffff;        /* tarjetas blancas */
   --text: #0f172a;        /* texto slate oscuro */
   --muted: #64748b;       /* texto secundario */
-  --green: #16a34a;       /* verde ecologico (acento) */
-  --green-soft: #16a34a1f; /* verde al 12% para fondos suaves */
+  --green: #15803d;       /* verde ecologico (acento) — verde-700: contraste 5.0:1, cumple WCAG AA */
+  --green-soft: #15803d1f; /* verde al 12% para fondos suaves */
   --border: #e2e8f0;      /* bordes claros */
   --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
   --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
@@ -56,7 +56,7 @@ header.top p {
   margin-top: 8px;
   background: var(--green-soft);
   color: var(--green);
-  border: 1px solid rgba(22, 163, 74, 0.35);
+  border: 1px solid rgba(21, 128, 61, 0.35);
   padding: 4px 14px;
   border-radius: 999px;
   font-weight: 700;
@@ -137,7 +137,7 @@ header.top p {
 .btn-primary {
   background: var(--green);
   color: #fff;
-  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+  box-shadow: 0 2px 8px rgba(21, 128, 61, 0.3);
 }
 .btn-ghost {
   background: #f1f5f9;
@@ -440,12 +440,32 @@ header.top p {
 .nick-modal input:focus {
   outline: none;
   border-color: var(--green);
-  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+  box-shadow: 0 0 0 3px rgba(21, 128, 61, 0.15);
 }
 .nick-tag {
   font-weight: 600;
   opacity: 0.9;
   text-transform: none;
+}
+.consent-note {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-align: center;
+  margin: 10px 0 0;
+  line-height: 1.4;
+}
+.consent-note a {
+  color: var(--green);
+  text-decoration: underline;
+}
+.app-footer {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 0.72rem;
+}
+.app-footer a {
+  color: var(--muted);
+  text-decoration: none;
 }
 
 /* ---- Ranking: usuario actual ---- */
@@ -457,7 +477,7 @@ header.top p {
 /* ---- Guia de primer uso ---- */
 .howto {
   background: var(--card);
-  border: 1px solid rgba(22, 163, 74, 0.35);
+  border: 1px solid rgba(21, 128, 61, 0.35);
   border-radius: 16px;
   padding: 14px 16px;
   margin-bottom: 14px;
@@ -509,7 +529,7 @@ header.top p {
   height: 64px;
   object-fit: cover;
   border-radius: 10px;
-  border: 2px solid rgba(22, 163, 74, 0.5);
+  border: 2px solid rgba(21, 128, 61, 0.5);
   animation: framepop 0.3s ease;
 }
 @keyframes framepop {

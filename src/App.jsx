@@ -141,10 +141,15 @@ export default function App() {
             onChange={(e) => setNickInput(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && saveNickname()}
             placeholder="Ej: AnaRecicla"
+            aria-label="Tu apodo para el ranking"
           />
           <button className="btn btn-primary" onClick={saveNickname} disabled={nickInput.trim().length < 2}>
             Empezar a escanear
           </button>
+          <p className="consent-note">
+            Tu apodo y tus escaneos se guardan de forma anónima (sin correo ni contraseña).{' '}
+            <a href="/privacidad.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a>
+          </p>
         </div>
       )}
 
@@ -182,6 +187,9 @@ export default function App() {
           <span className="tab-icon">🏆</span>Ranking
         </button>
       </nav>
+      <footer className="app-footer">
+        <a href="/privacidad.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a>
+      </footer>
     </div>
   );
 }

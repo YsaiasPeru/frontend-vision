@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#15803d" />
+    <title>Política de Privacidad — EcoSort Vision</title>
+    <style>
+      :root {
+        --bg: #f8fafc;
+        --card: #ffffff;
+        --text: #0f172a;
+        --muted: #64748b;
+        --green: #15803d;
+        --green-soft: #15803d1f;
+        --border: #e2e8f0;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0; padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        line-height: 1.6;
+      }
+      .wrap { max-width: 680px; margin: 0 auto; padding: 28px 20px 60px; }
+      h1 { color: var(--green); font-size: 1.6rem; margin: 0 0 4px; }
+      h2 { font-size: 1.1rem; margin: 28px 0 6px; }
+      .updated { color: var(--muted); font-size: 0.82rem; margin: 0 0 20px; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 18px 20px;
+        margin-bottom: 14px;
+      }
+      ul { margin: 6px 0; padding-left: 22px; }
+      li { margin-bottom: 4px; }
+      .tag {
+        display: inline-block;
+        background: var(--green-soft);
+        color: var(--green);
+        border: 1px solid rgba(21,128,61,0.35);
+        border-radius: 999px;
+        padding: 2px 12px;
+        font-size: 0.78rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+      }
+      a { color: var(--green); }
+      .muted { color: var(--muted); }
+      .back { display: inline-block; margin-top: 24px; font-size: 0.85rem; }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <h1>Política de Privacidad</h1>
+      <p class="updated">EcoSort Vision · Última actualización: 11 de octubre de 2026</p>
+
+      <div class="card">
+        <span class="tag">Responsable</span>
+        <p style="margin:0">
+          <b>Ysaias Godoy</b><br />
+          Correo de contacto: <a href="mailto:ysaias.y.godoy.g@gmail.com">ysaias.y.godoy.g@gmail.com</a>
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">1. Qué es EcoSort Vision</h2>
+        <p style="margin:0">
+          EcoSort Vision es una herramienta educativa y gratuita que usa inteligencia artificial
+          para indicarte en qué tacho debes separar un residuo. No es una red social ni una
+          tienda: no vendemos nada ni mostramos publicidad.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">2. Qué datos recogemos</h2>
+        <p>Recogemos lo <b>mínimo necesario</b> para que la app funcione:</p>
+        <ul>
+          <li><b>Apodo</b> (opcional): solo para mostrarte en el ranking. No es un nombre real ni un correo.</li>
+          <li><b>Identificador de dispositivo</b>: un código aleatorio (UUID) generado en tu navegador. No te identifica personalmente.</li>
+          <li><b>Historial de escaneos y eco-puntos</b>: qué material se clasificó, la confianza del modelo y la fecha.</li>
+        </ul>
+        <p><b>Respecto a las fotos de la cámara:</b> se envían al servidor <b>solo para clasificarlas en ese momento</b>. El servidor las procesa en memoria y las descarta. <b>No se guardan en la base de datos ni se comparten con nadie.</b></p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">3. Qué NO recogemos</h2>
+        <ul>
+          <li>Correo electrónico, contraseña, teléfono o documentos de identidad.</li>
+          <li>Ubicación (GPS) ni contactos.</li>
+          <li>Cookies de terceros, publicidad ni rastreadores.</li>
+          <li>Herramientas de analítica (no usamos Google Analytics ni similar).</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">4. Para qué usamos los datos</h2>
+        <ul>
+          <li>Clasificar el residuo que escaneas y mostrarte el tacho correcto.</li>
+          <li>Mostrar tu historial y sumar eco-puntos.</li>
+          <li>Mantener el ranking de eco-héroes (con tu apodo, si lo elegiste).</li>
+        </ul>
+        <p style="margin:0" class="muted">No usamos tus datos para ninguna otra finalidad ni los vendemos.</p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">5. Dónde se guardan y con quién</h2>
+        <ul>
+          <li>El apodo, el identificador y el historial se guardan en <b>PostgreSQL (Neon)</b>, y el identificador también en el <code>localStorage</code> de tu navegador.</li>
+          <li>La app se aloja en <b>Vercel</b> y el servidor en <b>Render</b>. Actúan como proveedores técnicos (encargados del tratamiento), no usan tus datos para sus propios fines.</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">6. Cuánto tiempo los conservamos</h2>
+        <p style="margin:0">
+          El identificador vive en tu navegador hasta que borres los datos del sitio. El
+          historial se conserva mientras exista la app. Puedes pedir que se elimine en
+          cualquier momento escribiendo al correo del responsable.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">7. Tus derechos</h2>
+        <p style="margin:0">
+          Puedes ejercer tus derechos de <b>acceso, rectificación y supresión</b> de tus datos,
+          así como oponerte a su tratamiento, escribiendo a
+          <a href="mailto:ysaias.y.godoy.g@gmail.com">ysaias.y.godoy.g@gmail.com</a>.
+          Se aplica la normativa peruana de protección de datos personales (Ley N.º 29733) y,
+          si accedes desde la Unión Europea, el RGPD (Reglamento General de Protección de Datos).
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">8. Menores de edad</h2>
+        <p style="margin:0">
+          La app es educativa y no recoge datos que permitan identificar a una persona. Aun así,
+          recomendamos que menores la usen con supervisión de un adulto.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top:0">9. Cambios en esta política</h2>
+        <p style="margin:0">
+          Si cambiamos algo importante en cómo tratamos los datos, actualizaremos esta página y
+          la fecha de arriba.
+        </p>
+      </div>
+
+      <a class="back" href="/">← Volver a EcoSort Vision</a>
+    </div>
+  </body>
+</html>
