@@ -1,6 +1,7 @@
 // En desarrollo usa el proxy de Vite (mismo origen -> /api).
-// En produccion pon la URL publica de tu backend de Rust aqui:
-export const API_BASE = import.meta.env.DEV ? '' : 'https://tu-backend-rust.fly.dev';
+// En produccion apunta al backend desplegado en Fly.io.
+// (Si cambias el nombre de la app en fly.toml, actualiza esta URL.)
+export const API_BASE = import.meta.env.DEV ? '' : 'https://ecosort-vision-backend.onrender.com';
 
 // Identificador anonimo del dispositivo (se crea una vez y se guarda).
 export function getUserId() {
