@@ -568,3 +568,138 @@ header.top p {
   font-weight: 600;
   animation: pop 0.3s ease;
 }
+
+/* =========================================================
+   ESCRITORIO (>= 900px): la app deja de verse "como teléfono"
+   y se adapta al ancho de la ventana. El móvil no cambia.
+   ========================================================= */
+@media (min-width: 900px) {
+  .app {
+    max-width: 1180px;
+    padding: 28px 40px 56px;
+    padding-bottom: 56px; /* sin nav inferior fija en escritorio */
+  }
+
+  /* --- Cabecera horizontal (marca a la izq, puntos a la der) --- */
+  header.top {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  header.top h1 {
+    font-size: 1.9rem;
+  }
+  header.top p {
+    flex: 1;
+    margin: 0 0 0 18px;
+    font-size: 0.95rem;
+  }
+  .points-pill {
+    margin-top: 0;
+    font-size: 1rem;
+  }
+
+  /* --- Nav: barra superior en vez de bottom-nav fija --- */
+  nav.tabs {
+    position: static;
+    transform: none;
+    left: auto;
+    max-width: none;
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+    padding: 6px;
+    margin-bottom: 24px;
+    gap: 6px;
+  }
+  .tab {
+    flex-direction: row;
+    gap: 8px;
+    font-size: 0.9rem;
+    padding: 12px 22px;
+  }
+  .tab .tab-icon {
+    font-size: 1.05rem;
+  }
+
+  /* --- Contenido: rejilla de 2 columnas simétricas --- */
+  .main {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 22px 28px;
+    align-items: start;
+  }
+
+  /* Elementos que ocupan el ancho completo */
+  .main > .section-title,
+  .main > .nick-modal,
+  .main > .howto,
+  .main > .loading,
+  .main > .error-box {
+    grid-column: 1 / -1;
+  }
+  .section-title {
+    margin: 4px 0 2px;
+  }
+  .nick-modal,
+  .howto {
+    max-width: 720px;
+  }
+
+  /* --- Escaneo: cámara (izq) | resultado (der) --- */
+  .main[data-tab="scan"] {
+    grid-template-columns: minmax(360px, 460px) 1fr;
+  }
+  .scan-layout {
+    display: contents; /* el grid controla el posicionamiento */
+  }
+  .scan-cam {
+    grid-column: 1;
+  }
+  .scan-result {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    position: sticky;
+    top: 28px;
+  }
+  .camera-wrap {
+    aspect-ratio: 4 / 3; /* webcam apaisada, no vertical de celular */
+  }
+  .scan-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    min-height: 240px;
+    border: 2px dashed var(--border);
+    border-radius: 20px;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    padding: 24px;
+  }
+
+  /* --- Guía e Historial: tarjetas repartidas en 2 columnas --- */
+  .main[data-tab="guide"] > .mat-card,
+  .main[data-tab="history"] > .mat-card {
+    margin-bottom: 0; /* el gap del grid hace la separación */
+  }
+
+  /* --- Ranking: filas más anchas y cómodas --- */
+  .main[data-tab="rank"] > .lb-row {
+    grid-column: 1 / -1; /* leaderboard en una sola columna ancha */
+    margin-bottom: 0;
+  }
+  .main[data-tab="rank"] {
+    grid-template-columns: 1fr;
+    max-width: 720px;
+  }
+
+  .btn {
+    font-size: 1rem;
+    padding: 14px;
+  }
+}

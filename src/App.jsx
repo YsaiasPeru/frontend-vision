@@ -130,6 +130,22 @@ export default function App() {
         </div>
       </header>
 
+      <nav className="tabs">
+        <button className={`tab ${tab === 'scan' ? 'active' : ''}`} onClick={() => setTab('scan')}>
+          <span className="tab-icon">📷</span>Escanear
+        </button>
+        <button className={`tab ${tab === 'guide' ? 'active' : ''}`} onClick={() => setTab('guide')}>
+          <span className="tab-icon">📚</span>Guía
+        </button>
+        <button className={`tab ${tab === 'history' ? 'active' : ''}`} onClick={() => setTab('history')}>
+          <span className="tab-icon">🕘</span>Historial
+        </button>
+        <button className={`tab ${tab === 'rank' ? 'active' : ''}`} onClick={() => setTab('rank')}>
+          <span className="tab-icon">🏆</span>Ranking
+        </button>
+      </nav>
+
+      <main className="main" data-tab={tab}>
       {showNickPrompt && (
         <div className="nick-modal">
           <h2>👋 ¡Hola! Elige un apodo</h2>
@@ -172,21 +188,8 @@ export default function App() {
       {tab === 'guide' && <GuideTab materials={materials} />}
       {tab === 'rank' && <RankTab leaders={leaders} nickname={nickname} />}
       {tab === 'history' && <HistoryTab history={history} />}
+      </main>
 
-      <nav className="tabs">
-        <button className={`tab ${tab === 'scan' ? 'active' : ''}`} onClick={() => setTab('scan')}>
-          <span className="tab-icon">📷</span>Escanear
-        </button>
-        <button className={`tab ${tab === 'guide' ? 'active' : ''}`} onClick={() => setTab('guide')}>
-          <span className="tab-icon">📚</span>Guía
-        </button>
-        <button className={`tab ${tab === 'history' ? 'active' : ''}`} onClick={() => setTab('history')}>
-          <span className="tab-icon">🕘</span>Historial
-        </button>
-        <button className={`tab ${tab === 'rank' ? 'active' : ''}`} onClick={() => setTab('rank')}>
-          <span className="tab-icon">🏆</span>Ranking
-        </button>
-      </nav>
       <footer className="app-footer">
         <a href="/privacidad.html" target="_blank" rel="noopener noreferrer">Política de privacidad</a>
       </footer>
@@ -213,50 +216,59 @@ function HowToCard({ onDismiss }) {
 
 function ScanTab({ webcamRef, onScan, loading, result, error, frames, onRetry }) {
   return (
-    <>
-      <div className="camera-wrap">
-        <Webcam
-          ref={webcamRef}
-          audio={false}
-          screenshotFormat="image/jpeg"
-          screenshotQuality={0.92}
-          videoConstraints={{
-            facingMode: 'environment',
-            width: { ideal: 1920 },
-            height: { ideal: 1080 },
-          }}
-        />
-        <div className="scan-frame" />
-        {!loading && <div className="laser" />}
-        <div className="cam-hint">
-          Centra el residuo · buena luz · que llene el marco
+    <div className="scan-layout">
+      <div className="scan-cam">
+        <div className="camera-wrap">
+          <Webcam
+            ref={webcamRef}
+            audio={false}
+            screenshotFormat="image/jpeg"
+            screenshotQuality={0.92}
+            videoConstraints={{
+              facingMode: 'environment',
+              width: { ideal: 1920 },
+              height: { ideal: 1080 },
+            }}
+          />
+          <div className="scan-frame" />
+          {!loading && <div className="laser" />}
+          <div className="cam-hint">
+            Centra el residuo · buena luz · que llene el marco
+          </div>
         </div>
+
+        <button className="btn btn-primary" onClick={onScan} disabled={loading}>
+          {loading ? 'Analizando 3 capturas…' : '🎯 Identificar residuo'}
+        </button>
+
+        {loading && (
+          <>
+            <div className="loading">
+              <div className="spinner" />
+              La IA esta analizando 3 capturas…
+            </div>
+            {frames.length > 0 && (
+              <div className="frames">
+                {frames.map((f, i) => (
+                  <img key={i} className="frame-thumb" src={f} alt={`captura ${i + 1}`} />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {error && <div className="error-box">⚠️ {error}</div>}
       </div>
 
-      <button className="btn btn-primary" onClick={onScan} disabled={loading}>
-        {loading ? 'Analizando 3 capturas…' : '🎯 Identificar residuo'}
-      </button>
-
-      {loading && (
-        <>
-          <div className="loading">
-            <div className="spinner" />
-            La IA esta analizando 3 capturas…
+      <div className="scan-result">
+        {!result && !loading && (
+          <div className="scan-placeholder">
+            🎯 Apunta a un residuo y pulsa "Identificar".<br />El resultado aparecerá aquí.
           </div>
-          {frames.length > 0 && (
-            <div className="frames">
-              {frames.map((f, i) => (
-                <img key={i} className="frame-thumb" src={f} alt={`captura ${i + 1}`} />
-              ))}
-            </div>
-          )}
-        </>
-      )}
-
-      {error && <div className="error-box">⚠️ {error}</div>}
-
-      {result && !loading && <ResultCard result={result} onRetry={onRetry} />}
-    </>
+        )}
+        {result && !loading && <ResultCard result={result} onRetry={onRetry} />}
+      </div>
+    </div>
   );
 }
 
