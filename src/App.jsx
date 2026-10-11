@@ -145,7 +145,7 @@ export default function App() {
         </button>
       </nav>
 
-      <main className="main" data-tab={tab}>
+      <main className="main">
       {showNickPrompt && (
         <div className="nick-modal">
           <h2>👋 ¡Hola! Elige un apodo</h2>
@@ -174,6 +174,7 @@ export default function App() {
         setShowHowTo(false);
       }} />}
 
+      <div className="tab-panel" data-tab={tab}>
       {tab === 'scan' && (
         <ScanTab
           webcamRef={webcamRef}
@@ -188,6 +189,7 @@ export default function App() {
       {tab === 'guide' && <GuideTab materials={materials} />}
       {tab === 'rank' && <RankTab leaders={leaders} nickname={nickname} />}
       {tab === 'history' && <HistoryTab history={history} />}
+      </div>
       </main>
 
       <footer className="app-footer">

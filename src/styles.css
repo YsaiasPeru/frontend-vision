@@ -625,43 +625,50 @@ header.top p {
     font-size: 1.05rem;
   }
 
-  /* --- Contenido: rejilla de 2 columnas simétricas --- */
+  /* --- Contenido principal: bloque normal (modal y guía apilados) --- */
   .main {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 22px 28px;
-    align-items: start;
-  }
-
-  /* Elementos que ocupan el ancho completo */
-  .main > .section-title,
-  .main > .nick-modal,
-  .main > .howto,
-  .main > .loading,
-  .main > .error-box {
-    grid-column: 1 / -1;
-  }
-  .section-title {
-    margin: 4px 0 2px;
+    display: block;
   }
   .nick-modal,
   .howto {
-    max-width: 720px;
+    max-width: 560px;
+    margin-bottom: 20px;
+  }
+
+  /* --- Panel de pestañas: contenedor propio de cada vista --- */
+  .tab-panel[data-tab="guide"],
+  .tab-panel[data-tab="history"] {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 24px;
+    align-items: start;
+  }
+  .tab-panel .section-title {
+    grid-column: 1 / -1;
+    margin: 4px 0 0;
+  }
+  .tab-panel[data-tab="guide"] > .mat-card,
+  .tab-panel[data-tab="history"] > .mat-card {
+    margin-bottom: 0; /* el gap del grid hace la separación */
+  }
+
+  /* --- Ranking: columna única --- */
+  .tab-panel[data-tab="rank"] {
+    display: block;
+    max-width: 680px;
+  }
+  .tab-panel[data-tab="rank"] > .lb-row {
+    margin-bottom: 10px;
   }
 
   /* --- Escaneo: cámara (izq) | resultado (der) --- */
-  .main[data-tab="scan"] {
-    grid-template-columns: minmax(360px, 460px) 1fr;
-  }
   .scan-layout {
-    display: contents; /* el grid controla el posicionamiento */
-  }
-  .scan-cam {
-    grid-column: 1;
+    display: grid;
+    grid-template-columns: minmax(360px, 440px) 1fr;
+    gap: 28px;
+    align-items: start;
   }
   .scan-result {
-    grid-column: 2;
-    grid-row: 1 / span 2;
     position: sticky;
     top: 28px;
   }
@@ -680,22 +687,6 @@ header.top p {
     font-size: 0.95rem;
     line-height: 1.6;
     padding: 24px;
-  }
-
-  /* --- Guía e Historial: tarjetas repartidas en 2 columnas --- */
-  .main[data-tab="guide"] > .mat-card,
-  .main[data-tab="history"] > .mat-card {
-    margin-bottom: 0; /* el gap del grid hace la separación */
-  }
-
-  /* --- Ranking: filas más anchas y cómodas --- */
-  .main[data-tab="rank"] > .lb-row {
-    grid-column: 1 / -1; /* leaderboard en una sola columna ancha */
-    margin-bottom: 0;
-  }
-  .main[data-tab="rank"] {
-    grid-template-columns: 1fr;
-    max-width: 720px;
   }
 
   .btn {
