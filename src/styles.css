@@ -1,0 +1,550 @@
+/* ===== EcoSort Vision — mobile-first (TEMA CLARO) ===== */
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+:root {
+  --bg: #f8fafc;          /* fondo blanco roto */
+  --card: #ffffff;        /* tarjetas blancas */
+  --text: #0f172a;        /* texto slate oscuro */
+  --muted: #64748b;       /* texto secundario */
+  --green: #16a34a;       /* verde ecologico (acento) */
+  --green-soft: #16a34a1f; /* verde al 12% para fondos suaves */
+  --border: #e2e8f0;      /* bordes claros */
+  --shadow: 0 1px 3px rgba(15, 23, 42, 0.08), 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  overscroll-behavior-y: none;
+}
+
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  padding: 16px;
+  padding-bottom: 96px;
+}
+
+header.top {
+  text-align: center;
+  margin-bottom: 14px;
+}
+header.top h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  color: var(--green);
+}
+header.top p {
+  margin: 4px 0 0;
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+.points-pill {
+  display: inline-block;
+  margin-top: 8px;
+  background: var(--green-soft);
+  color: var(--green);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  padding: 4px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+/* ---- Camara (se queda oscura: es un feed de video) ---- */
+.camera-wrap {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 3 / 4;
+  box-shadow: var(--shadow-md);
+}
+.camera-wrap video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.scan-frame {
+  position: absolute;
+  inset: 12%;
+  border: 3px solid rgba(255, 255, 255, 0.35);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+.laser {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #22c55e, transparent);
+  box-shadow: 0 0 12px #22c55e;
+  animation: scan 2s ease-in-out infinite;
+}
+@keyframes scan {
+  0%,
+  100% {
+    top: 14%;
+  }
+  50% {
+    top: 84%;
+  }
+}
+
+.cam-hint {
+  position: absolute;
+  bottom: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 0.78rem;
+  color: #fff;
+  text-shadow: 0 1px 4px #000;
+}
+
+/* ---- Botones ---- */
+.btn {
+  width: 100%;
+  border: none;
+  border-radius: 16px;
+  padding: 16px;
+  font-size: 1.05rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.2s;
+  margin-top: 14px;
+}
+.btn:active {
+  transform: scale(0.97);
+}
+.btn:disabled {
+  opacity: 0.5;
+}
+.btn-primary {
+  background: var(--green);
+  color: #fff;
+  box-shadow: 0 2px 8px rgba(22, 163, 74, 0.3);
+}
+.btn-ghost {
+  background: #f1f5f9;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+/* ---- Tarjeta de resultado ---- */
+.result {
+  margin-top: 16px;
+  border-radius: 20px;
+  padding: 20px;
+  text-align: center;
+  animation: pop 0.3s ease;
+  border: 2px solid;
+  box-shadow: var(--shadow-md);
+}
+@keyframes pop {
+  from {
+    transform: scale(0.92);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.result .bin-emoji {
+  font-size: 3rem;
+}
+.result h2 {
+  margin: 6px 0 2px;
+  font-size: 1.4rem;
+}
+.result .bin-name {
+  font-weight: 700;
+  font-size: 1rem;
+  margin: 8px 0;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  display: inline-block;
+  padding: 6px 16px;
+  border-radius: 10px;
+}
+.result .conf {
+  font-size: 0.78rem;
+  opacity: 0.85;
+  margin: 6px 0;
+  color: var(--muted);
+}
+.result .tip {
+  font-size: 0.85rem;
+  line-height: 1.45;
+  margin-top: 10px;
+  opacity: 0.95;
+}
+.result .examples {
+  font-size: 0.78rem;
+  opacity: 0.75;
+  margin-top: 6px;
+  color: var(--muted);
+}
+.result .earned {
+  font-size: 1.1rem;
+  font-weight: 800;
+  margin-top: 12px;
+  color: var(--green);
+}
+
+/* Alternativas cuando la IA duda */
+.alts {
+  margin-top: 14px;
+  text-align: left;
+}
+.alts h3 {
+  font-size: 0.8rem;
+  color: var(--muted);
+  margin: 0 0 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.alt-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: var(--shadow);
+}
+.alt-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.alt-row .alt-info {
+  flex: 1;
+}
+.alt-row .alt-name {
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+.alt-row .alt-bin {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+.alt-row .alt-conf {
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+
+/* ---- Carga ---- */
+.loading {
+  text-align: center;
+  padding: 24px;
+  color: var(--muted);
+}
+.spinner {
+  width: 34px;
+  height: 34px;
+  border: 4px solid rgba(15, 23, 42, 0.1);
+  border-top-color: var(--green);
+  border-radius: 50%;
+  margin: 0 auto 10px;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---- Guia / tabs ---- */
+.tabs {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -2px 10px rgba(15, 23, 42, 0.06);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+  gap: 6px;
+}
+.tab {
+  flex: 1;
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 6px 4px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.tab .tab-icon {
+  font-size: 1.3rem;
+}
+.tab.active {
+  color: var(--green);
+  background: var(--green-soft);
+}
+
+/* ---- Lista de materiales ---- */
+.mat-card {
+  background: var(--card);
+  border-radius: 16px;
+  padding: 14px;
+  margin-bottom: 12px;
+  border-left: 6px solid;
+  border: 1px solid var(--border);
+  border-left-width: 6px;
+  border-left-style: solid;
+  box-shadow: var(--shadow);
+}
+.mat-card .mat-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.mat-card .mat-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.mat-card h3 {
+  margin: 0;
+  font-size: 1.05rem;
+  flex: 1;
+}
+.mat-card .mat-points {
+  font-size: 0.78rem;
+  color: var(--green);
+  font-weight: 700;
+}
+.mat-card .mat-bin {
+  font-size: 0.82rem;
+  font-weight: 700;
+  margin: 6px 0;
+}
+.mat-card .mat-tip {
+  font-size: 0.82rem;
+  color: var(--muted);
+  line-height: 1.45;
+}
+.mat-card .mat-examples {
+  font-size: 0.75rem;
+  color: var(--muted);
+  opacity: 0.85;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* ---- Leaderboard ---- */
+.lb-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  box-shadow: var(--shadow);
+}
+.lb-rank {
+  font-size: 1.2rem;
+  width: 32px;
+  text-align: center;
+}
+.lb-name {
+  flex: 1;
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.lb-pts {
+  color: var(--green);
+  font-weight: 800;
+}
+
+.section-title {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  margin: 18px 0 10px;
+}
+
+.error-box {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  color: #dc2626;
+  border-radius: 12px;
+  padding: 12px;
+  font-size: 0.85rem;
+  margin-top: 12px;
+  text-align: center;
+}
+
+/* ---- Modal de apodo ---- */
+.nick-modal {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 20px;
+  margin-bottom: 16px;
+  text-align: center;
+  box-shadow: var(--shadow-md);
+}
+.nick-modal h2 {
+  margin: 0 0 6px;
+}
+.nick-modal p {
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin: 0 0 14px;
+}
+.nick-modal input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  color: var(--text);
+  font-size: 1rem;
+  margin-bottom: 6px;
+  text-align: center;
+}
+.nick-modal input:focus {
+  outline: none;
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.15);
+}
+.nick-tag {
+  font-weight: 600;
+  opacity: 0.9;
+  text-transform: none;
+}
+
+/* ---- Ranking: usuario actual ---- */
+.lb-row.me {
+  border: 1px solid var(--green);
+  background: var(--green-soft);
+}
+
+/* ---- Guia de primer uso ---- */
+.howto {
+  background: var(--card);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  border-radius: 16px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+}
+.howto .howto-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.howto h3 {
+  margin: 0;
+  font-size: 0.98rem;
+  color: var(--green);
+}
+.howto .howto-x {
+  background: none;
+  border: none;
+  color: var(--muted);
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 4px;
+  line-height: 1;
+}
+.howto ul {
+  margin: 6px 0 0;
+  padding-left: 18px;
+}
+.howto li {
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.howto li b {
+  color: var(--text);
+}
+
+/* ---- Miniaturas de las 3 capturas durante el analisis ---- */
+.frames {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 12px;
+}
+.frame-thumb {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 2px solid rgba(22, 163, 74, 0.5);
+  animation: framepop 0.3s ease;
+}
+@keyframes framepop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ---- Feedback: reportar clasificacion incorrecta ---- */
+.feedback {
+  margin-top: 10px;
+}
+.feedback-btn {
+  background: rgba(15, 23, 42, 0.04);
+  border: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.feedback-btn:active {
+  background: rgba(15, 23, 42, 0.1);
+}
+.feedback-thanks {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  color: var(--green);
+  font-weight: 600;
+  animation: pop 0.3s ease;
+}

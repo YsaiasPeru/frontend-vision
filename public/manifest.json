@@ -1,0 +1,18 @@
+{
+  "name": "EcoSort Vision",
+  "short_name": "EcoSort",
+  "description": "Aprende a clasificar tus residuos con IA real",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0f172a",
+  "theme_color": "#16a34a",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
